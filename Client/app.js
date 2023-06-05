@@ -198,3 +198,16 @@ function displayMovies(movies) {
     });
   }
   
+  // Create a delete button element
+const deleteButton = document.createElement("button");
+deleteButton.textContent = "Clear Results";
+deleteButton.addEventListener("click", clearResults);
+
+// Append the delete button to a parent element (e.g., the document body)
+document.body.appendChild(deleteButton);
+
+// Function to clear the search results
+function clearResults() {
+  // Clear the existing movie cards
+  moviesContainer.innerHTML = "";
+}
