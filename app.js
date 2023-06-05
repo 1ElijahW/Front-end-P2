@@ -52,7 +52,7 @@ function searchMovie() {
   const movieTitle = searchInput.value;
 
   // Make a GET request to the OMDb API
-  fetch(`http://www.omdbapi.com/?apikey=245d7e38&s=${encodeURIComponent(movieTitle)}`)
+  fetch(`https://www.omdbapi.com/?apikey=245d7e38&s=${encodeURIComponent(movieTitle)}`)
     .then(response => response.json())
     .then(data => {
       // Process the returned movie data and display movie cards
