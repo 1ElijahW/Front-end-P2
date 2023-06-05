@@ -9,32 +9,38 @@
   <div class="container">
     <h1>Cineflix</h1>
 
-    <div class="form-group">
+    <form class="form-group">
       <h2>Search Movie</h2>
       <input type="text" id="searchInput" placeholder="Enter movie title">
       <button id="searchMovieBtn">Search</button>
-    </div>
+    </form>
 
-    <div class="form-group">
+    <form class="form-group">
       <h2>Create Movie</h2>
       <input type="text" id="createTitle" placeholder="Enter movie title">
       <input type="text" id="createYear" placeholder="Enter movie year">
       <button id="createMovieBtn">Create</button>
-    </div>
+    </form>
 
-    <div class="form-group">
+    <form class="form-group">
       <h2>Update Movie</h2>
       <input type="text" id="updateId" placeholder="Enter movie ID">
       <input type="text" id="updateTitle" placeholder="Enter updated title">
       <input type="text" id="updateYear" placeholder="Enter updated year">
       <button id="updateMovieBtn">Update</button>
-    </div>
+    </form>
+
+    <form class="form-group">
+      <h2>Delete Movie</h2>
+      <input type="text" id="deleteId" placeholder="Enter movie ID">
+      <button id="deleteMovieBtn" onclick="(event) => console.log('delete!')">Delete</button>
+    </form>
 
     <div id="moviesContainer"></div>
   </div>
   <div id="ratingsContainer"></div> 
 </div>
 
-  <script src="app.js"></script>
+  <script defer src="app.js"></script>
 </body>
 </html>

@@ -11,17 +11,21 @@ const updateIdInput = document.getElementById("updateId");
 const updateTitleInput = document.getElementById("updateTitle");
 const updateYearInput = document.getElementById("updateYear");
 const updateMovieBtn = document.getElementById("updateMovieBtn");
+const deleteMovieBtn = document.getElementById("deleteMovieBtn");
 
 // Add an event listener to the "Search Movie" button
 searchMovieBtn.addEventListener("click", searchMovie);
 createMovieBtn.addEventListener("click", createMovie);
 updateMovieBtn.addEventListener("click", updateMovie);
+deleteMovieBtn.addEventListener("click", deleteMovie);
+
 
 // Fetch movies from the backend API
 function fetchMovies() {
   fetch('https://p2-backapi.herokuapp.com/movies')
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       displayMovies(data);
     })
     .catch(error => {
@@ -73,7 +77,7 @@ function createMovie() {
   const movieYear = createYearInput.value;
 
   // Make a POST request to create a new movie
-  fetch('https://p2-backapi.herokuapp.com/movies', {
+  fetch('https://p2-backapi.herokuapp.com/movie', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -108,7 +112,7 @@ function updateMovie() {
     const updatedYear = updateYearInput.value;
   
     // Make a PUT request to update the movie
-    fetch(`https://p2-backapi.herokuapp.com/movies/${movieId}`, {
+    fetch(`https://p2-backapi.herokuapp.com/movie/${movieId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -144,30 +148,43 @@ function updateMovie() {
   }
   
 
-  function deleteMovie(movieId) {
-    return new Promise((resolve, reject) => {
-      // Make a DELETE request to delete the movie
-      fetch(`https://p2-backapi.herokuapp.com/movies/${movieId}`, {
-        method: 'DELETE',
+  function deleteMovie(event) {
+    event.preventDefault();
+  
+    const movieId = document.getElementById('deleteId').value;
+  
+    // Make a DELETE request to remove the movie
+    fetch(`https://p2-backapi.herokuapp.com/movie/${movieId}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.text();  // assuming your API returns a message in text format
+        } else {
+          throw new Error('Failed to delete movie');
+        }
       })
-        .then(response => {
-          if (response.status === 204) {
-            // Movie deleted successfully
-            resolve("Movie deleted successfully!");
-          } else {
-            // Movie deletion failed
-            reject(new Error("Failed to delete movie."));
-          }
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+      .then(message => {
+        console.log(message);
+        // Display a success message or perform any other necessary actions
+        alert("Movie deleted successfully!");
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle the error gracefully, show an error message, etc.
+        alert("Failed to delete movie");
+      });
+  
+    // Clear input field
+    document.getElementById('deleteId').value = '';
   }
   
 
 // Define the displayMovies function
 function displayMovies(movies) {
+
+    console.log(movies)
+
     // Clear the existing movie cards
     moviesContainer.innerHTML = "";
   
@@ -177,14 +194,19 @@ function displayMovies(movies) {
       const movieCard = document.createElement("div");
       movieCard.classList.add("movie-card");
   
+
+      console.log(movie.imdbID)
       // Create an image element for the movie poster
       const posterImg = document.createElement("img");
       posterImg.src = `https://img.omdbapi.com/?apikey=245d7e38&i=${movie.imdbID}`;
+      posterImg.onerror = function() {
+      posterImg.src = 'https://i0.wp.com/capri.org.au/wp-content/uploads/2017/10/poster-placeholder.jpg?ssl=1';
+      }
       posterImg.alt = movie.Title;
   
       // Create a heading element for the movie title
       const titleHeading = document.createElement("h2");
-      titleHeading.textContent = movie.Title;
+      titleHeading.textContent = movie.title;
   
       // Create a paragraph element for the movie year
       const yearParagraph = document.createElement("p");

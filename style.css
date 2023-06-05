@@ -33,6 +33,7 @@ input[type="number"] {
   border-radius: 5px;
   border: 1px solid #ccc;
   box-sizing: border-box; /* Added */
+  margin-bottom: 16px;
 }
 
 button {
