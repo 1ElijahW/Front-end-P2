@@ -35,7 +35,7 @@ function fetchRatings() {
     .then(response => response.json())
     .then(data => {
       // Process the returned rating data
-      console.log(data); // You can perform further actions with the rating data here
+      displayRatings(data); // Call the displayRatings function to show the ratings on the live server
     })
     .catch(error => {
       console.error('Error:', error);
@@ -144,25 +144,27 @@ function updateMovie() {
   }
   
 
-// Define the deleteMovie function
-function deleteMovie(movieId) {
-  // Make a DELETE request to delete the movie
-  fetch(`https://p2-backapi.herokuapp.com/movies/${movieId}`, {
-    method: 'DELETE',
-  })
-    .then(response => {
-      if (response.status === 204) {
-        // Movie deleted successfully
-        console.log("Movie deleted successfully!");
-      } else {
-        // Movie deletion failed
-        console.error("Failed to delete movie.");
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
+  function deleteMovie(movieId) {
+    return new Promise((resolve, reject) => {
+      // Make a DELETE request to delete the movie
+      fetch(`https://p2-backapi.herokuapp.com/movies/${movieId}`, {
+        method: 'DELETE',
+      })
+        .then(response => {
+          if (response.status === 204) {
+            // Movie deleted successfully
+            resolve("Movie deleted successfully!");
+          } else {
+            // Movie deletion failed
+            reject(new Error("Failed to delete movie."));
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
     });
-}
+  }
+  
 
 // Define the displayMovies function
 function displayMovies(movies) {
@@ -177,7 +179,7 @@ function displayMovies(movies) {
   
       // Create an image element for the movie poster
       const posterImg = document.createElement("img");
-      posterImg.src = `http://img.omdbapi.com/?apikey=245d7e38&i=${movie.imdbID}`;
+      posterImg.src = `https://img.omdbapi.com/?apikey=245d7e38&i=${movie.imdbID}`;
       posterImg.alt = movie.Title;
   
       // Create a heading element for the movie title
@@ -200,7 +202,7 @@ function displayMovies(movies) {
   
   // Create a delete button element
 const deleteButton = document.createElement("button");
-deleteButton.textContent = "Clear Results";
+deleteButton.textContent = "Delete Results";
 deleteButton.addEventListener("click", clearResults);
 
 // Append the delete button to a parent element (e.g., the document body)
