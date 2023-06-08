@@ -39,7 +39,8 @@ function fetchRatings() {
     .then(response => response.json())
     .then(data => {
       // Process the returned rating data
-      displayRatings(data); // Call the displayRatings function to show the ratings on the live server
+      // TODO
+      // Call the displayRatings function to show the ratings on the live server
     })
     .catch(error => {
       console.error('Error:', error);
