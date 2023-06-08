@@ -21,6 +21,11 @@ h1 {
   margin-bottom: 15px;
 }
 
+form h2 {
+  color: #ffffff;
+}
+
+
 label {
   display: block;
   font-weight: bold;
