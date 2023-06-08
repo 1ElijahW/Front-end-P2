@@ -10,7 +10,7 @@ This web application provides users with the ability to search for movies, add n
 
 # Deployment
 
-The Cineflix web application is currently deployed on Netlify. You can access it by clicking:[NETLIFY](https://papaya-mermaid-89cef7.netlify.app)
+The Cineflix web application is currently deployed on Netlify. You can access it by clicking:[NETLIFY](https://creative-sopapillas-b0f4df.netlify.app/?)
 
 
 # MVP 

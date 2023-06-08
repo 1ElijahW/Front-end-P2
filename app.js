@@ -19,6 +19,9 @@ createMovieBtn.addEventListener("click", createMovie);
 updateMovieBtn.addEventListener("click", updateMovie);
 deleteMovieBtn.addEventListener("click", deleteMovie);
 
+// Call the fetchMovies and fetchRatings functions to get initial data
+fetchMovies();
+fetchRatings();
 
 // Fetch movies from the backend API
 function fetchMovies() {
@@ -47,9 +50,6 @@ function fetchRatings() {
     });
 }
 
-// Call the fetchMovies and fetchRatings functions to get initial data
-fetchMovies();
-fetchRatings();
 
 // Define the searchMovie function
 function searchMovie(event) {
@@ -239,3 +239,5 @@ function clearResults() {
   // Clear the existing movie cards
   moviesContainer.innerHTML = "";
 }
+
+
