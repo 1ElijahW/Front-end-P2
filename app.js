@@ -52,7 +52,8 @@ fetchMovies();
 fetchRatings();
 
 // Define the searchMovie function
-function searchMovie() {
+function searchMovie(event) {
+  event.preventDefault();
   // Get the user input from the search input field
   const movieTitle = searchInput.value;
 
@@ -72,7 +73,8 @@ function searchMovie() {
 }
 
 // Define the createMovie function
-function createMovie() {
+function createMovie(event) {
+  event.preventDefault();
   // Get the user input from the create movie form
   const movieTitle = createTitleInput.value;
   const movieYear = createYearInput.value;
@@ -85,7 +87,7 @@ function createMovie() {
     },
     body: JSON.stringify({
       title: movieTitle,
-      year: movieYear,
+      Year: movieYear,
     }),
   })
     .then(response => response.json())
@@ -106,7 +108,8 @@ function createMovie() {
 }
 
 // Define the updateMovie function
-function updateMovie() {
+function updateMovie(event) {
+  event.preventDefault();
     // Get the user input from the update movie form
     const movieId = updateIdInput.value;
     const updatedTitle = updateTitleInput.value;
@@ -120,7 +123,7 @@ function updateMovie() {
       },
       body: JSON.stringify({
         title: updatedTitle,
-        year: updatedYear,
+        Year: updatedYear,
       }),
     })
       .then(response => {
